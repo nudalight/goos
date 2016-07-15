@@ -1,0 +1,35 @@
+.login-form.float-center
+    form.column.small-12.small-centered(
+        name='formLogin'
+    )
+
+        .input-group
+            input(
+                name='login'
+                type='text'
+                placeholder='Login'
+                ng-model='form.login'
+                required
+                validate-me
+            )
+            .help-text.error {{ formLogin.login.$valid }}
+            .help-text.error {{ errors.login }}
+
+        .input-group
+            input(
+                name='password'
+                type='password'
+                placeholder='password'
+                ng-model='form.password'
+                required
+                validate-me
+            )
+            .help-text.error {{ formLogin.password.$valid }}
+
+        button.button.expanded(
+            ng-click='actions.auth()',
+            ng-disabled='formLogin.$invalid'
+        ) Submit
+
+        .help-text.error {{ formLogin.$valid }}
+        .help-text.error {{ errors.form }}
