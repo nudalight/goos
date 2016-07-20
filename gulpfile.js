@@ -144,6 +144,8 @@ gulp.task('vendor:font', () => {
 });
 
 
+gulp.task('drop', ['sass', 'jade', 'vendor', 'js']);
+
 gulp.task('serve', () => {
   bs.init({
     server: './app',
