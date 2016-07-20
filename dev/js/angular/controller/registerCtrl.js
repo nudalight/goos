@@ -4,8 +4,8 @@ angular.module('app')
       function($scope, authService){
 
         $scope.state = {
-          step: 2
-        };
+          step: 1
+        }; 
 
         $scope.actions = {
           stepUp: function (nodeForm) {
