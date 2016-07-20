@@ -1,12 +1,20 @@
-nav.top-bar(
-    data-topbar
-    role='navigation'
-)
-    .row.expanded.column
-        .button-group.text-right
-            a.button.secondary(
-                href='#/login'
-            ) Login
-            a.button(
-                href='#/register'
-            ) Sign up
+md-toolbar()
+    .md-toolbar-tools(
+        layout='row'
+        layout-align='end center'
+    )
+
+        md-button(
+            href='#/login'
+            ng-show='!user.token'
+        ) Login
+
+        md-button(
+            href='#/register'
+            ng-show='!user.token'
+        ) Register
+
+        md-button(
+            ng-click='actions.logout()'
+            ng-show='user.token'
+        ) Log out

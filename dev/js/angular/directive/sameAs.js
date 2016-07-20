@@ -11,6 +11,9 @@ angular.module('app')
         });
 
         ctrl.$validators.match = function(modelValue, viewValue) {
+          var isValid = viewValue === scope.$eval(modelToMatch);
+
+          ctrl.$setValidity('sameAs', isValid);
           return viewValue === scope.$eval(modelToMatch);
         };
       }

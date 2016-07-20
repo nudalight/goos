@@ -1,40 +1,32 @@
 angular.module('app')
-  .controller('registerCtrl', function($scope){
-    // validate fields
+  .controller('registerCtrl', 
+    ['$scope', 'authService',
+      function($scope, authService){
 
-    $scope.state = {
-      step: 2
-    };
+        $scope.state = {
+          step: 1
+        };
 
-    $scope.errors = {
-      form: undefined
-    };
+        $scope.actions = {
+          stepUp: function (nodeForm) {
 
-    $scope.actions = {};
+            if (nodeForm.$valid) {
 
-    $scope.actions.stepUp = function(nodeForm){
+              $scope.state.step++;
 
-      console.log($scope.formOne);
+              if ($scope.state.step == 3) {
+                var formsData = mergeObjects($scope.formOne, $scope.formTwo);
+                authService.register(formsData);
+              }
 
-      console.log('step Two', nodeForm.$valid);
+            }
+            
+          }
+        };
 
-      if (nodeForm.$valid){
 
-        $scope.state.step = 2;
 
-      } else {
-
-        // throw error
 
       }
-
-
-    };
-
-
-    // on BUTT.click wtite to LOCKER
-    // swith to next page
-
-
-
-  });
+    ]
+  );

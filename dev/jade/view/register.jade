@@ -1,7 +1,12 @@
-.register-form.float-center
+include ../mixin/form-content
+
+div(
+    layout='column'
+    layout-align='center center'
+    flex
+)
+
     .steps
-
-
         ul
             li(
                 ng-class="{1: 'active'}[state.step]"
@@ -10,294 +15,55 @@
                 ng-class="{2: 'active'}[state.step]"
             ) Step 2
 
-    .step-one(
-        ng-class="{2: 'hide'}[state.step]"
-    )
-        form(
-            name='nodeFormOne'
+
+    .register-forms
+        .step-one(
+            ng-class="{2: 'hide'}[state.step]"
         )
-            .input-group
-                label(
-                    for='name'
-                ) Name
-                input(
-                    id='name'
-                    name='name'
-                    type='text'
-                    placeholder='Name'
-                    ng-model='formOne.name'
-                    validate-me
-                    required
+            form(
+                method='post'
+                name='nodeFormOne'
+                ng-submit='actions.stepUp(nodeFormOne)'
+            )
+
+                +form-content(
+                    'nodeFormOne',
+                    'formOne',
+                    'name', 'surname', 'phone', 'country', 'city', 'street'
                 )
-                .help-text.error(
-                    ng-show="nodeFormOne.name.$invalid && nodeFormOne.name.$dirty"
-                ) should be between 2 and 15 chars, required
 
-
-            .input-group
-                label(
-                    for='surname'
-                ) Surname
-                input(
-                    id='surname'
-                    name='surname'
-                    type='text'
-                    placeholder='Surname'
-                    ng-model='formOne.surname'
-                    validate-me
-                    required
+                .actions(
+                    layout='row'
+                    layout-align='end center'
                 )
-                .help-text.error(
-                    ng-show="nodeFormOne.surname.$invalid && nodeFormOne.surname.$dirty"
-                ) should be between 2 and 20 chars, required
+
+                    md-button.md-raised.md-primary(
+                        type='submit'
+                        ng-disabled='nodeFormOne.$invalid'
+                    ) Continue
 
 
-            .input-group
-                label(
-                    for='birthday'
-                ) Date of birth
-                input(
-                    id='birthday'
-                    name='birthday'
-                    type='date'
-                    placeholder='mm/dd/yy'
-                    ng-model="formOne.birthday"
-                    validate-me
-                    required
-                )
-                .help-text.error(
-                    ng-show="nodeFormOne.birthday.$invalid && nodeFormOne.birthday.$dirty"
-                ) you must be 18 years old, required
-
-
-            .input-group
-                label(
-                    for='phone'
-                ) Phone
-                input(
-                    id='phone'
-                    name='phone'
-                    type='text'
-                    placeholder='Phone'
-                    ng-model="formOne.phone"
-                    required
-                )
-                .help-text.error(
-                    ng-show="nodeFormOne.phone.$invalid && nodeFormOne.phone.$dirty"
-                ) required
-
-
-            .input-group
-                label(
-                    for='country'
-                ) Country
-                input(
-                    id='country'
-                    name='country'
-                    type='text'
-                    placeholder='Country'
-                    ng-model="formOne.country"
-                    required
-                )
-                .help-text.error(
-                    ng-show="nodeFormOne.country.$invalid && nodeFormOne.country.$dirty"
-                ) required
-
-
-            .input-group
-                label(
-                    for='city'
-                ) City
-                input(
-                    id='city'
-                    name='city'
-                    type='text'
-                    placeholder='City'
-                    ng-model='formOne.city'
-                    required
-                )
-                .help-text.error(
-                    ng-show="nodeFormOne.city.$invalid && nodeFormOne.city.$dirty"
-                ) required
-
-
-            .input-group
-                label(
-                    for='street'
-                ) Street
-                input(
-                    id='street'
-                    name='street'
-                    type='text'
-                    placeholder='Street'
-                    ng-model='formOne.street'
-                )
-                .help-text.error(
-                    ng-show="nodeFormOne.street.$invalid && nodeFormOne.street.$dirty"
-                ) NOT REQUIRED
-
-
-            a.button.float-right(
-                ng-click='actions.stepUp(nodeFormOne)'
-            ) Continue
-
-
-
-    .step-two(
-        ng-class="{1: 'hide'}[state.step]"
-    )
-
-        form(
-            name='nodeFormTwo'
+        .step-two(
+            ng-class="{1: 'hide'}[state.step]"
         )
 
-            .input-group
-                label(
-                    for='username'
-                ) Username
-                input(
-                    id='username'
-                    name='username'
-                    type='text'
-                    placeholder='Username'
-                    ng-model='formTwo.username'
-                    validate-me
-                    required
+            form(
+                method='post'
+                name='nodeFormTwo'
+                ng-submit='actions.stepUp(nodeFormTwo)'
+
+            )
+
+                +form-content(
+                    'nodeFormTwo',
+                    'formTwo',
+                    'username', 'password', 'repassword', 'employmentStatus', 'employmentPlace', 'annualIncome', 'favouriteSport', 'acceptTerms'
                 )
-                .help-text.error(
-                    ng-show="nodeFormTwo.username.$invalid && nodeFormTwo.username.$dirty"
-                ) Must contain 2-15 chars, required
 
 
-            .input-group
-                label(
-                    for='password'
-                ) Password
-                input(
-                    id='password'
-                    name='password'
-                    type='password'
-                    placeholder='Password'
-                    ng-model='formTwo.password'
-                    validate-me
-                    required
-                )
-                .help-text.error(
-                    ng-show="nodeFormTwo.password.$invalid && nodeFormTwo.password.$dirty"
-                ) Minimum 6 letters, needs to have at least one capital letter and number, allowed characters are only letters and numbers, required
 
+                md-button.md-raised.md-primary(
+                    type='submit'
+                    ng-disabled='nodeFormTwo.$invalid'
+                ) Finish
 
-            .input-group
-                label(
-                    for='repassword'
-                ) Confirm password
-                input(
-                    id='repassword'
-                    name='repassword'
-                    type='password'
-                    placeholder='Confirm password'
-                    ng-model='formTwo.repassword'
-                    same-as='formTwo.password'
-                    required
-                )
-                .help-text.error {{ nodeFormTwo.repassword.$valid }}
-
-
-            .input-group
-                label(
-                    for='register-employment-status'
-                ) Employment status
-                select(
-                    id='register-employment-status'
-                    name='register-employment-status'
-                    ng-model='form.employmentStatus'
-                    data-prompt='Employment status'
-                )
-                    option(
-                        value='employed'
-                    ) Employed
-                    option(
-                        value='unemployed'
-                    ) Unemployed
-                    option(
-                        value='student'
-                    ) Student
-                .help-text.error {{ nodeFormTwo.employmentStatus.$valid }}
-
-
-            .input-group
-                label(
-                    for='employmentPlace'
-                ) Employment place
-                input(
-                    id='employmentPlace'
-                    name='employmentPlace'
-                    type='text'
-                    placeholder='Employment place'
-                    ng-model='formTwo.employmentPlace'
-                    required
-                )
-                .help-text.error {{ nodeFormTwo.employmentPlace.$valid }}
-
-
-            .input-group
-                label(
-                    for='annualIncome'
-                ) Annual income
-                select(
-                    id='annualIncome'
-                    name='annualIncome'
-                    ng-model='form.annualIncome'
-                )
-                    option(
-                        value='100'
-                    ) $100.000 / year
-                    option(
-                        value='200'
-                    ) $200.000 / year
-                    option(
-                        value='300'
-                    ) $300.000 / year
-                    option(
-                        value='400'
-                    ) $400.000 / year
-                    option(
-                        value='500'
-                    ) $500.000 / year
-
-                .help-text.error {{ nodeFormTwo.annualIncome.$valid }}
-
-
-            .input-group
-                label(
-                    for='favouriteSport'
-                ) Favourite sport
-                input(
-                    id='favouriteSport'
-                    name='favouriteSport'
-                    type='text'
-                    placeholder='Favourite sport'
-                    ng-model='formTwo.favouriteSport'
-                )
-                .help-text.error {{ nodeFormTwo.favouriteSport.$valid }}
-
-
-            .input-group
-                input(
-                    id='acceptTerms'
-                    name='acceptTerms'
-                    type='checkbox'
-                    ng-model='acceptTerms'
-                    required
-                )
-                label(
-                    for='acceptTerms'
-                ) I accept terms and conditions
-                .help-text.error {{ nodeFormTwo.acceptTerms.$valid }}
-
-
-            a.button.float-right(
-                ng-click='actions.stepUp(nodeFormTwo)'
-            ) Finish
-
-//http://stackoverflow.com/questions/15798594/angularjs-forms-validate-fields-after-user-has-left-field

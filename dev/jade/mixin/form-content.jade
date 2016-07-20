@@ -1,0 +1,109 @@
+mixin form-content(formName, dataGroup, ...inputNames)
+
+    - var len = inputNames.length
+
+    - for (var i = 0; i < inputNames.length; i++)
+        - var fi = data.formContent[inputNames[i]];
+
+        - if (fi.element == 'input')
+            md-input-container.md-block
+                label=fi.label
+                input(
+                type = fi.type
+                name = inputNames[i]
+                ng-model = dataGroup + '.' + inputNames[i]
+                required = fi.required
+                validate-me = fi.validators && fi.validators.validateMe || false
+                same-as = (fi.validators && fi.validators.sameAs) ? dataGroup + '.' + fi.validators.sameAs : false
+                )
+                ng-messages(
+                    role = 'alert'
+                    for = formName + '.' + inputNames[i] + '.$error'
+                )
+                    ng-message(
+                        when='validmypants, sameAs'
+                    )= fi.error
+
+                    ng-message(
+                        when='required'
+                    ) Required
+
+
+        - else if (fi.element == 'select')
+            md-input-container
+                label= fi.label
+                md-select(
+                    style='width: 300px'
+                    validate-me = fi.validators && fi.validators.validateMe || false
+                    name = inputNames[i]
+                    ng-required = (typeof fi.required === 'boolean') ? '' + fi.required : dataGroup + '.' + fi.required
+                    ng-model = dataGroup + '.' + inputNames[i]
+                    ng-show = (fi.display && fi.display) ? dataGroup + '.' + fi.display : 'true'
+
+                )
+                    - for (var d = 0; d < fi.data.length; d++)
+                        md-option(
+                            value = fi.data[d].value
+                        )= fi.data[d].label
+
+                ng-messages(
+                    role = 'alert'
+                    for = formName + '.' + inputNames[i] + '.$error'
+                )
+                    ng-message(
+                        when='validmypants'
+                    )= 'error: ' + fi.error || ''
+
+
+
+        - else if (fi.element == 'checkbox')
+
+            md-input-container
+                md-checkbox(
+                    ng-model = dataGroup + '.' + inputNames[i]
+                    aria-label = fi.label
+                    required = fi.required
+                )= fi.label
+
+                ng-messages(
+                    role = 'alert'
+                    for = formName + '.' + inputNames[i] + '.$error'
+                )
+                    ng-message(
+                        when='required'
+                    )= fi.error
+
+        - else if (fi.element == 'datepicker')
+
+
+            md-datepicker(
+                ng-model = dataGroup + '.' + inputNames[i],
+                required = fi.required
+                md-placeholder = fi.label
+                validate-me = fi.validators && fi.validators.validateMe || false
+                name = inputNames[i]
+            )
+            div {{ formOne.birthday }}
+            .validation-messages(
+                ng-messages=formName + '.' + inputNames[i] + '.$error'
+            )
+                div(
+                ng-message='date'
+                ) Valid 33
+
+                div(
+                ng-message='validatemypants'
+                ) Valid 44
+
+                div(
+                ng-message='required'
+                ) Required
+
+
+
+
+
+
+
+
+

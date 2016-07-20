@@ -1,35 +1,29 @@
-.login-form.float-center
-    form.column.small-12.small-centered(
-        name='formLogin'
+include ../mixin/form-content
+
+div(
+    layout='column'
+    layout-align='center center'
+    flex
+)
+
+    form.login-form(
+        method='post'
+        name='nodeForm'
+        ng-submit='actions.login()'
     )
+        +form-content(
+            'nodeForm',
+            'form',
+            'username', 'password'
+        )
 
-        .input-group
-            input(
-                name='login'
-                type='text'
-                placeholder='Login'
-                ng-model='form.login'
-                required
-                validate-me
-            )
-            .help-text.error {{ formLogin.login.$valid }}
-            .help-text.error {{ errors.login }}
+        .actions(
+            layout='row'
+            layout-align='end center'
+        )
+            md-button.md-raised.md-primary(
+                type='submit'
+                ng-disabled='nodeForm.$invalid'
+            ) Submit
 
-        .input-group
-            input(
-                name='password'
-                type='password'
-                placeholder='password'
-                ng-model='form.password'
-                required
-                validate-me
-            )
-            .help-text.error {{ formLogin.password.$valid }}
 
-        button.button.expanded(
-            ng-click='actions.auth()',
-            ng-disabled='formLogin.$invalid'
-        ) Submit
-
-        .help-text.error {{ formLogin.$valid }}
-        .help-text.error {{ errors.form }}

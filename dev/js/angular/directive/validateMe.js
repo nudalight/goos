@@ -1,5 +1,5 @@
 angular.module('app')
-  .directive('registerAnimation', [function() {
+  .directive('validateMe', ['validateObj', function(validateObj) {
     return {
       require: 'ngModel',
       link: function(scope, element, attr, mCtrl) {
@@ -7,19 +7,16 @@ angular.module('app')
         function myValidation(value) {
 
           var isValid = validateMe();
-          mCtrl.$setValidity('v', isValid);
+          mCtrl.$setValidity('validmypants', isValid);
 
 
           function validateMe(){
+
             var result = true, cond;
 
-            validateObj[attr.name].regex.forEach(function(v, i, list){
-              cond = v.test(value);
-              console.log(v, cond);
-              if (!cond) {
-                result = false;
-              }
-            });
+            result = validateObj[attr.name].isValid(value);
+
+            console.log('result: ', result);
 
             return result;
           }

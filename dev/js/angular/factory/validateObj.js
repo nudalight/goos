@@ -1,8 +1,7 @@
 angular.module('app')
-  .factory('validateObj', function(){
+  .factory('validateObj', ['locker', function(locker){
     var
-      cond1, cond2, cond3, cond4, regex, result;
-
+      regex, result;
 
     return {
 
@@ -11,9 +10,9 @@ angular.module('app')
           console.log('check validity');
           return /^(.{6,15})$/.test(value);
         }
-      },
+      }, 
 
-      password: {  
+      password: {
         isValid: function(value){
           result = true;
           regex = [
@@ -53,11 +52,6 @@ angular.module('app')
 
           return legalAge < parseInt(current) - parseInt(provided);
         }
-      },
-
-      phone: {
-
       }
-
     };
-  });
+  }]);

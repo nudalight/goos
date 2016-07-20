@@ -1,2 +1,0 @@
-$('select').foundationSelect();
-$(document).foundation(); 
