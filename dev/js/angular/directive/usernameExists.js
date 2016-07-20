@@ -6,8 +6,6 @@ angular.module('app')
 
         function myValidation(value) {
 
-
-
           var isValid = validateMe();
           ctrl.$setValidity('usernameexists', isValid);
 
@@ -19,8 +17,6 @@ angular.module('app')
             var username = $cookies.get('username');
 
             var result = (username == value) || (username != value && !cond1)
-
-            console.log('hasLoginCheck: ', result);
 
             return result;
           }

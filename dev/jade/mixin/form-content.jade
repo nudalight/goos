@@ -36,16 +36,15 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
 
         - else if (fi.element == 'select')
-            md-input-container
+            md-input-container(
+                ng-show = (fi.display && fi.display) ? dataGroup + '.' + fi.display : 'true'
+            )
                 label= fi.label
                 md-select(
-                    style='width: 300px'
                     validate-me = fi.validators && fi.validators.validateMe || false
                     name = inputNames[i]
                     ng-required = (typeof fi.required === 'boolean') ? '' + fi.required : dataGroup + '.' + fi.required
                     ng-model = dataGroup + '.' + inputNames[i]
-                    ng-show = (fi.display && fi.display) ? dataGroup + '.' + fi.display : 'true'
-
                 )
                     - for (var d = 0; d < fi.data.length; d++)
                         md-option(
@@ -82,28 +81,32 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
         - else if (fi.element == 'datepicker')
 
 
-            md-datepicker(
-                ng-model = dataGroup + '.' + inputNames[i],
-                required = fi.required
-                md-placeholder = fi.label
-                validate-me = fi.validators && fi.validators.validateMe || false
-                name = inputNames[i]
-            )
-            div {{ formOne.birthday }}
-            .validation-messages(
-                ng-messages=formName + '.' + inputNames[i] + '.$error'
-            )
-                div(
-                ng-message='date'
-                ) Valid 33
+            div
+                md-datepicker(
+                    ng-model = dataGroup + '.' + inputNames[i],
+                    required = fi.required
+                    md-placeholder = fi.label
+                    validate-me = fi.validators && fi.validators.validateMe || false
+                    name = inputNames[i]
+                )
 
-                div(
-                ng-message='validatemypants'
-                ) Valid 44
+                ng-messages(
+                    for = formName + '.' + inputNames[i] + '.$error'
+                )
 
-                div(
-                ng-message='required'
-                ) Required
+                    ng-message(
+                        for = 'validmypants'
+                    )= fi.error
+
+                    ng-message(
+                        for = 'valid, invalid'
+                    ) Dont type date yourself, use datepicker
+
+                    ng-message(
+                        for = 'required'
+                    ) Required
+
+
 
 
 

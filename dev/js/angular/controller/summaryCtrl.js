@@ -4,8 +4,10 @@ angular.module('app')
       function($rootScope, $scope, locker, md5, $window){
 
         var U = locker.namespace('user=' + $rootScope.user.username);
+        var userData = U.all();
 
-        $scope.form = U.all();
+        $scope.form = userData;
+        $scope.form.birthday = new Date(userData.birthday);
 
         $scope.actions = {
           saveForm: function(){
