@@ -1,4 +1,4 @@
-mixin form-content(formName, dataGroup, ...inputNames)
+mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
     - var len = inputNames.length
 
@@ -15,6 +15,7 @@ mixin form-content(formName, dataGroup, ...inputNames)
                 required = fi.required
                 validate-me = fi.validators && fi.validators.validateMe || false
                 same-as = (fi.validators && fi.validators.sameAs) ? dataGroup + '.' + fi.validators.sameAs : false
+                username-exists = (modifier != 'login' && inputNames[i] == 'username') ? true : false
                 )
                 ng-messages(
                     role = 'alert'
@@ -27,6 +28,11 @@ mixin form-content(formName, dataGroup, ...inputNames)
                     ng-message(
                         when='required'
                     ) Required
+
+                    - if (modifier == 'register')
+                        ng-message(
+                            when='usernameexists'
+                        ) Username is taken
 
 
         - else if (fi.element == 'select')

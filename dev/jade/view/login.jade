@@ -14,8 +14,12 @@ div(
         +form-content(
             'nodeForm',
             'form',
+            'login',
             'username', 'password'
         )
+
+        .errors
+            .error {{ errors.password }}
 
         .actions(
             layout='row'

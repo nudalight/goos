@@ -60,7 +60,8 @@ module.exports.data = {
       type: 'text',
       required: true,
       validators: {
-        validateMe: true
+        validateMe: true,
+        usernameExists: true
       },
       error: 'Must contain 6-15 chars'
     },
@@ -69,7 +70,8 @@ module.exports.data = {
       label: 'Password',
       type: 'password',
       validators: {
-        validateMe: true
+        validateMe: true,
+        passwordCorrect: true
       },
       required: true,
       error: 'Minimum 6 letters, needs to have at least one capital letter and number, allowed characters are only letters and numbers'

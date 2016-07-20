@@ -1,9 +1,6 @@
 include ../mixin/form-content
 
 .summary(
-    layout='column'
-    layout-align='center center'
-    flex
 )
 
     form.summary-form(
@@ -33,6 +30,7 @@ include ../mixin/form-content
         +form-content(
             'nodeForm',
             'form',
+            'summary',
             'phone', 'street', 'city', 'country', 'username',
             'password', 'annualIncome', 'favouriteSport', 'employmentStatus', 'employmentPlace'
         )

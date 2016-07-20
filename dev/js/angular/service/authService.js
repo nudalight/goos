@@ -66,7 +66,7 @@ angular.module('app')
           console.log('user does not exist');
         }
 
-        // проверить, есть ли такой юзер в бд
+        return condPasswordMatch; // only for wrong pass msg
 
 
       };

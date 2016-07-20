@@ -4,7 +4,7 @@ angular.module('app')
       function($scope, authService){
 
         $scope.state = {
-          step: 1
+          step: 2
         };
 
         $scope.actions = {

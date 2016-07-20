@@ -1,15 +1,23 @@
+.summary
+  width: 100%
+  text-align: center
+
 .summary-form
-  display: flex
-  flex-wrap: wrap
-  padding: 2em 5em
+  box-sizing: border-box
+  width: 100%
+  padding: 1em
 
   > *
-    min-width: 200px
-    padding-right: 2em
-    flex-basis: 30%
+    text-align: left
+    //border: 1px solid red
+    display: inline-block !important
+    vertical-align: top
+    max-width: 400px
+    width: 100%
+    margin: .5em 1em
 
-  .actions
-    padding-bottom:  5em
+  md-button
+    display: inline
 
 
 @media all and (max-width: 1285px)
@@ -20,8 +28,6 @@
 
 @media all and (max-width: 685px)
 
-  .summary
-    padding-top: 20em
 
   .summary-form
     padding: 1em
@@ -31,3 +37,9 @@
 
     md-button
       margin-bottom: 2em
+
+
+@media all and (max-width: 520px)
+  .summary-form
+    > *
+      margin: .5em 0
