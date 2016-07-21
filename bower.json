@@ -21,6 +21,7 @@
     "angular-locker": "^2.0.4",
     "angular-md5": "^0.1.10",
     "angular-cookies": "^1.5.7",
-    "angular-material": "^1.0.9"
+    "angular-material": "^1.0.9",
+    "css-reset": "^2.5.1"
   }
 }

@@ -1,8 +1,8 @@
 angular.module('app')
-  .config(function($routeProvider){
+  .config(['$routeProvider', function($routeProvider){
     $routeProvider
       .when('/login', {
-        templateUrl: 'html/login.html', 
+        templateUrl: 'html/login.html',
         controller: 'loginCtrl'
       })
       .when('/register', {
@@ -17,4 +17,4 @@ angular.module('app')
         redirectTo: '/login'
       })
     ;
-  });
+  }]);
