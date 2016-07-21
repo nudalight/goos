@@ -1,5 +1,6 @@
 ## Issues
 1. ngMaterial datepicker doesn't work properly
+1.1. on FF datepicker popup doesn't show scroll bar
  
  
 ## readabout

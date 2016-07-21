@@ -91,19 +91,20 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                 )
 
                 ng-messages(
+                    ng-show = formName + '.' + inputNames[i] + '.$dirty && ' + formName + '.' + inputNames[i] + '$invalid'
                     for = formName + '.' + inputNames[i] + '.$error'
                 )
 
-                    ng-message(
-                        for = 'validmypants'
+                    ng-message.error(
+                        when = 'validmypants'
                     )= fi.error
 
-                    ng-message(
-                        for = 'valid, invalid'
-                    ) Dont type date yourself, use datepicker
+                    ng-message.error(
+                        when = 'valid, invalid'
+                    ) Date format shoult be yyyy-mm-dd
 
-                    ng-message(
-                        for = 'required'
+                    ng-message.error(
+                        when = 'required'
                     ) Required
 
 
