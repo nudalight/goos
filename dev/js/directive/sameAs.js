@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .directive('sameAs', function(){
     return {
       require: 'ngModel',

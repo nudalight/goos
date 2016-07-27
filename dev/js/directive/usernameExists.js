@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .directive('usernameExists', ['locker', '$cookies', function(locker, $cookies) {
     return {
       require: 'ngModel',

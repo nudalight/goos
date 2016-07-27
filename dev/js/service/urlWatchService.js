@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .service('urlWatchService',
     ['$rootScope', '$location', '$cookies',
       function($rootScope, $location, $cookies){
@@ -35,30 +35,33 @@ angular.module('app')
           // }
 
 
-          var cond1 = next.indexOf('summary') < 0;
-          var cond2 = current.indexOf('summary') < 0;
 
-          if (authed && cond1){
-            event.preventDefault();
-            console.log('AUTHED navigation prevented', $rootScope.user);
-          }
+          
 
-          var cond3 = next.indexOf('summary') > -1;
-          var cond4 = current.indexOf('summary') > -1;
-
-          if (!authed && cond3) {
-            event.preventDefault();
-            console.log('NOTATHED navigation prevented', $rootScope.user);
-          }
-
-          // redirects
-          if (authed && cond2) {
-            $location.path('/summary')
-          }
-
-          if (!authed && cond4){
-            $location.path('/');
-          }
+          // var cond1 = next.indexOf('summary') < 0;
+          // var cond2 = current.indexOf('summary') < 0;
+          //
+          // if (authed && cond1){
+          //   event.preventDefault();
+          //   console.log('AUTHED navigation prevented', $rootScope.user);
+          // }
+          //
+          // var cond3 = next.indexOf('summary') > -1;
+          // var cond4 = current.indexOf('summary') > -1;
+          //
+          // if (!authed && cond3) {
+          //   event.preventDefault();
+          //   console.log('NOTATHED navigation prevented', $rootScope.user);
+          // }
+          //
+          // // redirects
+          // if (authed && cond2) {
+          //   $location.path('/summary')
+          // }
+          //
+          // if (!authed && cond4){
+          //   $location.path('/');
+          // }
 
 
 

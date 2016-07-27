@@ -1,48 +1,5 @@
 .summary
-  width: 100%
-  text-align: center
+  padding-top: 1.5em
 
-.summary-form
-  box-sizing: border-box
-  width: 100%
-  padding: 1em
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
-
-  > *
-    text-align: left
-    //border: 1px solid red
-    display: inline-block !important
-    vertical-align: top
-    max-width: 400px
-    width: 100%
-    margin: 1.5em 1em
-
-  md-button
-    display: inline
-
-
-@media all and (max-width: 1285px)
-  .summary-form
-    > *
-     flex-basis: 42%
-
-
-@media all and (max-width: 685px)
-
-
-  .summary-form
-    padding: 1em
-
-    > *
-      flex-basis: 94%
-
-    md-button
-      margin-bottom: 2em
-
-
-@media all and (max-width: 520px)
-  .summary-form
-    > *
-      margin: .5em 0
+  > *:last-child
+    max-width: 25em

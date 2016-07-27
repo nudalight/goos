@@ -1,4 +1,6 @@
-angular.module('app')
+angular
+  .module('goos')
+  
   .config(['lockerProvider', function config(lockerProvider) {
     lockerProvider.defaults({
       driver: 'local',

@@ -66,7 +66,7 @@ gulp.task('sass', () => {
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(cleanCss())
-    .pipe(raname('output.min.css'))
+    .pipe(rename('output.min.css'))
     .pipe(gulp.dest('./app/css'))
     .pipe(bs.stream())
 });
@@ -96,26 +96,24 @@ gulp.task('jade:index', () => {
     }))
     .pipe(gulp.dest('./app'))
     .pipe(bs.stream())
-});
+});  
 
 
 gulp.task('js', () => {
   return gulp.src('dev/js/**/*.js')
     .pipe(order([
-      '**/helper/**/*.js',
-      '**/angular/module/*.js',
-      '**/angular/*.js',
+      '**/module/*.js',
       '**/*.js'
     ]))
+    .pipe(insert.wrap('(function(){\n\n', '\n\n})();'))
     .pipe(debug())
     .pipe(concat('output.js'))
-    .pipe(insert.wrap('(function(){\n\n', '\n\n})();'))
     .pipe(gulp.dest('./app/js'))
     .pipe(bs.stream())
     .pipe(rename('output.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./app/js'))
-    .pipe(bs.stream()) 
+    .pipe(bs.stream())
 });
 
 
@@ -125,7 +123,7 @@ gulp.task('drop', ['sass', 'jade', 'vendor', 'js']);
 gulp.task('serve', () => {
   bs.init({
     server: './app',
-    port: 4477
+    port: 4466
   });
 
   gulp.watch('./dev/sass/**/*.sass', ['sass']);

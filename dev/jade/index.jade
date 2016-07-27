@@ -1,11 +1,15 @@
 doctype html
-html(ng-app='app', ng-controller='mainCtrl')
+html(
+    ng-app='goos'
+    ng-controller='mainCtrl'
+    ng-strict-di
+)
     head
         meta(charset='utf-8')
         title AUTH1
 
         link(rel='stylesheet', href='css/vendor.min.css')
-        link(rel='stylesheet', href='css/output.css')
+        link(rel='stylesheet', href='css/output.min.css')
 
     body
         include view/header

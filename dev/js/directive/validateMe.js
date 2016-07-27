@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .directive('validateMe', ['validateObj', function(validateObj) {
     return {
       require: 'ngModel',

@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .service('authService',
   ['$rootScope', 'locker', 'md5', '$location', '$cookies', '$route', '$window',
     function($rootScope, locker, md5, $location, $cookies, $route, $window){

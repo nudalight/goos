@@ -1,46 +1,31 @@
 include ../mixin/form-content
 
 .summary(
+    layout-padding
 )
 
-    form.summary-form(
+    ng-form.summary-form(
         name='nodeForm'
-        ng-disabled='state.isEdited'
+        layout='row'
+        layout-wrap
     )
-
-        //- name, surname
-
-        md-input-container
-            label Name
-            input(
-                name="name"
-                ng-required="true"
-                ng-model="form.name"
-                disabled
-            )
-        md-input-container
-            label Surname
-            input(
-                name="surname"
-                ng-required="true"
-                ng-model="form.surname"
-                disabled
-            )
 
         +form-content(
             'nodeForm',
             'form',
             'summary',
-            'phone', 'street', 'city', 'country', 'username',
+            'name', 'surname', 'phone', 'street', 'city', 'country', 'username',
             'password', 'birthday', 'annualIncome', 'favouriteSport', 'employmentStatus', 'employmentPlace'
         )
 
-        //- employmentStatus, employment Place
-
-    md-button.md-raised.md-primary(
-        ng-click='actions.saveForm()'
-        ng-disabled='nodeForm.$dirty && nodeForm.$invalid || nodeForm.$pristine'
-    ) Save
+    .actions(
+        layout='row'
+        layout-align='center center'
+    )
+        md-button.md-raised.md-primary(
+            ng-click='actions.saveForm()'
+            ng-disabled='nodeForm.$dirty && nodeForm.$invalid || nodeForm.$pristine'
+        ) Save
 
 
 

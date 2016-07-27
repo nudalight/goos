@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('goos')
   .factory('validateObj', ['locker', function(locker){
     var
       regex, result;
@@ -39,7 +39,7 @@ angular.module('app')
       surname: {
         isValid: function(value){
           return /^(.){2,20}$/.test(value);
-        }
+        } 
       },
 
       birthday: {
@@ -52,6 +52,13 @@ angular.module('app')
 
           return legalAge < parseInt(current) - parseInt(provided);
         }
+      },
+
+      phone: {
+        isValid: function(value){
+          return /^(\d[- .]*){7,13}$/.test(value);
+        }
       }
+
     };
   }]);

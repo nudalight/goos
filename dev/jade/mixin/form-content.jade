@@ -6,16 +6,19 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
         - var fi = data.formContent[inputNames[i]];
 
         - if (fi.element == 'input')
-            md-input-container.md-block
+            md-input-container.md-block(
+                flex='33'
+            )
                 label=fi.label
                 input(
-                type = fi.type
-                name = inputNames[i]
-                ng-model = dataGroup + '.' + inputNames[i]
-                required = fi.required
-                validate-me = fi.validators && fi.validators.validateMe || false
-                same-as = (fi.validators && fi.validators.sameAs) ? dataGroup + '.' + fi.validators.sameAs : false
-                username-exists = (modifier != 'login' && inputNames[i] == 'username') ? true : false
+                    type = fi.type
+                    name = inputNames[i]
+                    ng-model = dataGroup + '.' + inputNames[i]
+                    required = fi.required
+                    validate-me = fi.validators && fi.validators.validateMe || false
+                    same-as = (fi.validators && fi.validators.sameAs) ? dataGroup + '.' + fi.validators.sameAs : false
+                    username-exists = (modifier != 'login' && inputNames[i] == 'username') ? true : false
+                    ng-disabled = (modifier == 'summary' && (inputNames[i] == 'name' || inputNames[i] == 'surname')) ? true : false
                 )
                 ng-messages(
                     role = 'alert'
@@ -37,6 +40,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
         - else if (fi.element == 'select')
             md-input-container(
+                flex='33'
                 ng-show = (fi.display && fi.display) ? dataGroup + '.' + fi.display : 'true'
             )
                 label= fi.label
@@ -63,7 +67,9 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
         - else if (fi.element == 'checkbox')
 
-            md-input-container
+            md-input-container(
+                flex='33'
+            )
                 md-checkbox(
                     ng-model = dataGroup + '.' + inputNames[i]
                     aria-label = fi.label
@@ -81,17 +87,22 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
         - else if (fi.element == 'datepicker')
 
 
-            div
+            div(
+                flex='33'
+            )
+                label= fi.label
+
                 md-datepicker(
+                    name = inputNames[i]
                     ng-model = dataGroup + '.' + inputNames[i],
                     required = fi.required
                     md-placeholder = fi.label
                     validate-me = fi.validators && fi.validators.validateMe || false
-                    name = inputNames[i]
                 )
 
-                ng-messages(
-                    ng-show = formName + '.' + inputNames[i] + '.$dirty && ' + formName + '.' + inputNames[i] + '$invalid'
+
+                ng-messages.errors(
+                    ng-show = formName + '.' + inputNames[i] + '.$dirty'
                     for = formName + '.' + inputNames[i] + '.$error'
                 )
 
@@ -101,7 +112,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
                     ng-message.error(
                         when = 'valid, invalid'
-                    ) Date format shoult be yyyy-mm-dd
+                    ) Date format should be dd.mm.yyyy
 
                     ng-message.error(
                         when = 'required'

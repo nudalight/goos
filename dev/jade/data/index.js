@@ -34,8 +34,12 @@ module.exports.data = {
     phone: {
       element: 'input',
       label: 'Phone',
-      type: 'text',
-      required: true
+      type: 'tel',
+      validators: {
+        validateMe: true
+      },
+      required: true,
+      error: 'Must be 7-13 digits'
     },
     country: {
       element: 'input',
