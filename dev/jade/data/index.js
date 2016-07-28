@@ -23,7 +23,7 @@ module.exports.data = {
     birthday: {
       element: 'datepicker',
       label: 'Day of birth',
-      placeholder: 'yyyy-mm-dd',
+      placeholder: 'yyyy/mm/dd',
       required: true,
       validators: {
         validateMe: true

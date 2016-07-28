@@ -1,6 +1,6 @@
 angular
   .module('goos')
-  .factory('validateObj')
+  .factory('validateObj', validateObj)
 ;
 
 validateObj

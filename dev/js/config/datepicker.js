@@ -14,4 +14,4 @@ function datepicker($mdDateLocaleProvider){
     return moment(date).format('L');
   }
 
-}
+} 

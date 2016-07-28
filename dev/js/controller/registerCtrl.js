@@ -11,12 +11,12 @@ registerCtrl
 function registerCtrl($scope, authService, helperFactory){
 
   $scope.state = {
-    step: 2
+    step: 1
   };
-
+ 
   // костыль
   $scope.formTwo = {
-    birthday: 0
+    birthday: new Date(0)
   };
 
 
