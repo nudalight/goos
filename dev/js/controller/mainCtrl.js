@@ -1,9 +1,10 @@
-angular.module('goos')
+angular
+  .module('goos')
   .controller('mainCtrl', mainCtrl)
 ;
 
 mainCtrl
-  .$inject = ['$rootScope', '$scope', 'authService', '$cookies', 'urlWatchService']
+  .$inject = ['$rootScope', '$scope', 'authService', '$cookies', 'urlWatchService'] 
 ;
 
 
@@ -17,8 +18,8 @@ function mainCtrl($rootScope, $scope, authService, $cookies, urlWatchService){
   $rootScope.actions = {
     logout: authService.logout
   };
-
-  $rootScope.$on("$locationChangeStart", urlWatchService.handle);
+ 
+  $rootScope.$on('$locationChangeStart', urlWatchService.handle);
 }
 
 

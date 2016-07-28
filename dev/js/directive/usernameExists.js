@@ -1,32 +1,40 @@
-angular.module('goos')
-  .directive('usernameExists', ['locker', '$cookies', function(locker, $cookies) {
-    return {
-      require: 'ngModel',
-      link: function(scope, element, attr, ctrl) {
+angular
+  .module('goos')
+  .directive('usernameExists', usernameExists)
+;
 
-        function myValidation(value) {
-
-          var isValid = validateMe();
-          ctrl.$setValidity('usernameexists', isValid);
-
-          console.warn('un isValid: ', isValid);
-
-          function validateMe(){
-            var U = locker.namespace('user=' + value);
-            var cond1 = U.has('username');
-            var username = $cookies.get('username');
-
-            var result = (username == value) || (username != value && !cond1)
-
-            return result;
-          }
+usernameExists
+  .$inject = ['locker', '$cookies', '$log']
+;
 
 
-          return value;
+function usernameExists(locker, $cookies, $log) {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attr, ctrl) {
 
+      function myValidation(value) {
+
+        var isValid = validateMe();
+        ctrl.$setValidity('usernameexists', isValid);
+
+        $log.warn('un isValid: ', isValid);
+
+        function validateMe(){
+          var
+            U = locker.namespace('user=' + value),
+            cond1 = U.has('username'),
+            username = $cookies.get('username'),
+            result = (username == value) || (username != value && !cond1)
+          ;
+
+          return result;
         }
 
-        ctrl.$parsers.push(myValidation);
+        return value;
       }
+
+      ctrl.$parsers.push(myValidation);
     }
-  }]);
+  }
+}

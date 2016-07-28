@@ -1,12 +1,19 @@
 angular
   .module('goos')
-  
-  .config(['lockerProvider', function config(lockerProvider) {
-    lockerProvider.defaults({
-      driver: 'local',
-      namespace: 'app',
-      separator: '.',
-      eventsEnabled: true,
-      extend: {}
-    });
-  }]);
+  .config(locker)
+;
+
+locker
+  .$inject = ['lockerProvider']
+;
+
+
+function locker(lockerProvider){
+  lockerProvider.defaults({
+    driver: 'local',
+    namespace: 'app',
+    separator: '.',
+    eventsEnabled: true,
+    extend: {}
+  });
+}

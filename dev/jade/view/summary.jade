@@ -23,7 +23,7 @@ include ../mixin/form-content
         layout-align='center center'
     )
         md-button.md-raised.md-primary(
-            ng-click='actions.saveForm()'
+            ng-click='actions.saveForm(nodeForm)'
             ng-disabled='nodeForm.$dirty && nodeForm.$invalid || nodeForm.$pristine'
         ) Save
 

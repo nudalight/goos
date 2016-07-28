@@ -1,21 +1,26 @@
-angular.module('goos')
-  .directive('sameAs', function(){
-    return {
-      require: 'ngModel',
-      link: function(scope, element, attrs, ctrl) {
+angular
+  .module('goos')
+  .directive('sameAs', sameAs)
+;
 
-        var modelToMatch = attrs.sameAs;
 
-        scope.$watch(attrs.sameAs, function() {
-          ctrl.$validate();
-        });
+function sameAs(){
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ctrl) {
 
-        ctrl.$validators.match = function(modelValue, viewValue) {
-          var isValid = viewValue === scope.$eval(modelToMatch);
+      var modelToMatch = attrs.sameAs;
 
-          ctrl.$setValidity('sameAs', isValid);
-          return viewValue === scope.$eval(modelToMatch);
-        };
-      }
-    };
-  });
+      scope.$watch(attrs.sameAs, function() {
+        ctrl.$validate();
+      });
+
+      ctrl.$validators.match = function(modelValue, viewValue) {
+        var isValid = viewValue === scope.$eval(modelToMatch);
+
+        ctrl.$setValidity('sameAs', isValid);
+        return viewValue === scope.$eval(modelToMatch);
+      };
+    }
+  };
+}

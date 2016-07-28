@@ -1,4 +1,5 @@
-angular.module('goos')
+angular
+  .module('goos')
   .controller('registerCtrl', registerCtrl)
 ;
 
@@ -10,13 +11,14 @@ registerCtrl
 function registerCtrl($scope, authService, helperFactory){
 
   $scope.state = {
-    step: 1
+    step: 2
   };
 
   // костыль
   $scope.formTwo = {
     birthday: 0
-  }; 
+  };
+
 
 
   $scope.actions = {

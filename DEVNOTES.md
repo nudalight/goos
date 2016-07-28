@@ -1,11 +1,12 @@
 ## Issues
-1. add responsiveness to /summary
-2. prevent md5 hash password save on /summary
+1. add responsiveness to /summary +
+2. prevent md5 hash password save on /summary +
 3. fix datepicker label on /summary vs /register
-4. fix datepicker default value
-5. remove page reloadings
-6. finish urlWatcher service
-7. fix datepicker and its ng-messages markup (google, firefox) 
+4. fix datepicker default value 
+5. remove page reloadings --
+6. finish urlWatcher service +
+7. fix datepicker and its ng-messages markup (google, firefox)
+8. rename "validmypants" to "validateMe" +
 
 
 ## Issues & to-do's

@@ -7,7 +7,9 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
         - if (fi.element == 'input')
             md-input-container.md-block(
-                flex='33'
+                flex = (modifier == 'summary') ? '33' : '100'
+                flex-sm = (modifier == 'summary') ? '50' : ''
+                flex-xs = '100'
             )
                 label=fi.label
                 input(
@@ -25,7 +27,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                     for = formName + '.' + inputNames[i] + '.$error'
                 )
                     ng-message(
-                        when='validmypants, sameAs'
+                        when='validateMe, sameAs'
                     )= fi.error
 
                     ng-message(
@@ -40,7 +42,9 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
 
         - else if (fi.element == 'select')
             md-input-container(
-                flex='33'
+                flex = (modifier == 'summary') ? '33' : '100'
+                flex-sm = (modifier == 'summary') ? '50' : ''
+                flex-xs = '100'
                 ng-show = (fi.display && fi.display) ? dataGroup + '.' + fi.display : 'true'
             )
                 label= fi.label
@@ -60,7 +64,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                     for = formName + '.' + inputNames[i] + '.$error'
                 )
                     ng-message(
-                        when='validmypants'
+                        when='validateMe'
                     )= 'error: ' + fi.error || ''
 
 
@@ -68,7 +72,9 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
         - else if (fi.element == 'checkbox')
 
             md-input-container(
-                flex='33'
+                flex = (modifier == 'summary') ? '33' : '100'
+                flex-sm = (modifier == 'summary') ? '50' : ''
+                flex-xs = '100'
             )
                 md-checkbox(
                     ng-model = dataGroup + '.' + inputNames[i]
@@ -87,8 +93,10 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
         - else if (fi.element == 'datepicker')
 
 
-            div(
-                flex='33'
+            .md-datepicker-container(
+                flex = (modifier == 'summary') ? '33' : '100'
+                flex-sm = (modifier == 'summary') ? '50' : ''
+                flex-xs = '100'
             )
                 label= fi.label
 
@@ -96,7 +104,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                     name = inputNames[i]
                     ng-model = dataGroup + '.' + inputNames[i],
                     required = fi.required
-                    md-placeholder = fi.label
+                    md-placeholder = fi.placeholder
                     validate-me = fi.validators && fi.validators.validateMe || false
                 )
 
@@ -107,7 +115,7 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                 )
 
                     ng-message.error(
-                        when = 'validmypants'
+                        when = 'validateMe'
                     )= fi.error
 
                     ng-message.error(

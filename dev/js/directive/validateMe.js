@@ -1,32 +1,33 @@
-angular.module('goos')
-  .directive('validateMe', ['validateObj', function(validateObj) {
-    return {
-      require: 'ngModel',
-      link: function(scope, element, attr, mCtrl) {
+angular
+  .module('goos')
+  .directive('validateMe', validateMe)
+;
 
-        function myValidation(value) {
-
-          var isValid = validateMe();
-          mCtrl.$setValidity('validmypants', isValid);
+validateMe.$inject = ['validateObj', '$log'];
 
 
-          function validateMe(){
+function validateMe(validateObj, $log){ 
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attr, mCtrl) {
 
-            var result = true, cond;
+      function myValidation(value) {
 
-            result = validateObj[attr.name].isValid(value);
-
-            console.log('result: ', result);
-
-            return result;
-          }
+        var isValid = validateMe();
+        mCtrl.$setValidity('validateMe', isValid);
 
 
-          return value;
-
+        function validateMe(){
+          var result = validateObj[attr.name].isValid(value);
+          $log.log('result: ', result);
+          return result;
         }
 
-        mCtrl.$parsers.push(myValidation);
+        return value;
+
       }
+
+      mCtrl.$parsers.push(myValidation);
     }
-  }]);
+  }
+}

@@ -1,4 +1,5 @@
-angular.module('goos')
+angular
+  .module('goos')
   .config(route)
 ;
 

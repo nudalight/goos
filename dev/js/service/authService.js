@@ -1,92 +1,100 @@
-angular.module('goos')
-  .service('authService',
-  ['$rootScope', 'locker', 'md5', '$location', '$cookies', '$route', '$window',
-    function($rootScope, locker, md5, $location, $cookies, $route, $window){
+angular
+  .module('goos')
+  .service('authService', authService)
+;
 
-      this.auth = function(username){
-
-        var expireTs = new Date(new Date().getTime() + 1000 * 3600 * 24 * 2);
-        var tokenStr = (new Date).toString();
-        var token = md5.createHash(tokenStr);
-
-        $cookies.put('username', username, { expires: expireTs });
-        $cookies.put('token', token, { expires: expireTs });
-
-        $location.path('/summary');
-        $window.location.reload();
-
-        return token;
-      };
+authService
+  .$inject = ['$rootScope', 'locker', 'md5', '$cookies', '$window', '$log']
+;
 
 
-      this.register = function(formObj){
-        var U = locker.namespace('user=' + formObj.username);
+function authService ($rootScope, locker, md5, $cookies, $window, $log){
 
-        for (var key in formObj){
-          if (key == 'repassword'){
-            continue;
-          }
+  this.auth = function(username){
 
-          if (key == 'password'){
-            formObj[key] = md5.createHash(formObj.username + formObj.password);
-          }
+    var
+      expire = new Date(new Date().getTime() + 1000 * 3600 * 24 * 2),
+      tokenStr = (new Date).toString(),
+      token = md5.createHash(tokenStr)
+    ;
 
-          U.put(key, formObj[key])
-        }
+    $cookies.put('username', username, { expires: expire });
+    $cookies.put('token', token, { expires: expire });
 
-        U.put('token', this.auth(formObj.username));
-      };
+    $window.location.reload(); // otherwise the path would be not allowed by urlWatcherService
 
-
-      this.login = function(username, password){
-
-        var L = locker.namespace('user=' + username);
-
-        var condUserExist = L.has('username');
-        var consTokenExist = L.has('token');
-        var LPassword = L.get('password');
-        var HPassword = md5.createHash(username + password);
-        var condPasswordMatch =  LPassword == HPassword;
-
-        console.log('pass compare: ', LPassword, HPassword);
-
-        if (condUserExist){
-          console.log('user exists');
-
-          if (consTokenExist){
-            console.log('token exists');
-          } else {
-            console.log('token NOT used');
-
-            if (condPasswordMatch){
-              this.auth(username);
-            }
-          }
-        } else {
-          console.log('user does not exist');
-        }
-
-        return condPasswordMatch; // only for wrong pass msg
+    return token;
+  };
 
 
-      };
+  this.register = function(formObj){
+    var U = locker.namespace('user=' + formObj.username);
 
+    for (var key in formObj){
+      if (key == 'repassword'){
+        continue;
+      }
 
-      this.logout = function(){
+      if (key == 'password'){
+        formObj[key] = md5.createHash(formObj.username + formObj.password);
+      }
 
-        var L = locker.namespace('user=' + $rootScope.user.username);
-        L.forget('token');
-
-        $cookies.remove('username');
-        $cookies.remove('token');
-
-        $location.path('/');
-        $window.location.reload();
-
-      };
-
-
-
+      U.put(key, formObj[key])
     }
-  ]);
+
+    U.put('token', this.auth(formObj.username));
+  };
+
+
+  this.login = function(username, password){
+
+    var
+      U = locker.namespace('user=' + username),
+      condUserExist = U.has('username'),
+      consTokenExist = U.has('token'),
+      LPassword = U.get('password'),
+      HPassword = md5.createHash(username + password),
+      condPasswordMatch =  LPassword == HPassword
+    ;
+
+    $log.log('pass compare: ', LPassword, HPassword);
+
+    if (condUserExist){
+      $log.log('user exists');
+
+      if (consTokenExist){
+        $log.log('token exists');
+      } else { 
+        $log.log('token NOT used');
+
+        if (condPasswordMatch){
+          this.auth(username);
+        }
+      }
+    } else {
+      $log.log('user does not exist');
+    }
+
+    return condPasswordMatch; // only for wrong pass msg
+
+
+  };
+
+
+  this.logout = function(){
+
+    var U = locker.namespace('user=' + $rootScope.user.username);
+    U.forget('token');
+
+    $cookies.remove('username');
+    $cookies.remove('token');
+
+    $window.location.reload();  // otherwise the path would be not allowed by urlWatcherService
+
+  };
+
+
+
+}
+
 
