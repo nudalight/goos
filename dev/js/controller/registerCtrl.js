@@ -10,28 +10,26 @@ registerCtrl
 
 function registerCtrl($scope, authService, helperFactory){
 
-  var vm = $scope;
-
-  vm.state = {
+  $scope.state = {
     step: 1
   };
  
   // костыль
-  vm.formTwo = {
+  $scope.formTwo = {
     birthday: new Date(0)
   };
 
 
 
-  vm.actions = {
+  $scope.actions = {
     stepUp: function (nodeForm) {
 
       if (nodeForm.$valid) {
 
-        vm.state.step++;
+        $scope.state.step++;
 
-        if (vm.state.step == 3) {
-          var formsData = helperFactory.mergeObjects(vm.formOne, vm.formTwo);
+        if ($scope.state.step == 3) {
+          var formsData = helperFactory.mergeObjects($scope.formOne, $scope.formTwo);
           authService.register(formsData);
         }
 
