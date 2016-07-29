@@ -94,7 +94,7 @@ function authService(locker, md5, $cookies, $log, $location){
 
 
   function logout(){
-    var U = locker.namespace('user=' + authService.user.username);
+    var U = locker.namespace('user=' + vm.user.username);
     U.forget('token');
 
     $cookies.remove('username');

@@ -10,10 +10,9 @@ mainCtrl
 
 function mainCtrl($rootScope, $scope, authService, $cookies, urlWatchService){
 
-  // $rootScope.user = {
-  //   username: $cookies.get('username'),
-  //   token: $cookies.get('token')
-  // };
+  console.log(authService, authService.user);
+
+  $rootScope.user = authService.user;
 
   $rootScope.actions = {
     logout: authService.logout
