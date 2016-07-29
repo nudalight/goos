@@ -158,17 +158,4 @@ module.exports.data = {
     }
   }
 
-
-  ,
-
-
-
-
-  upper: function(str){
-
-  }
-
-
-
-
 };

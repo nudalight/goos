@@ -129,10 +129,10 @@ gulp.task('serve', () => {
   gulp.watch('./dev/sass/**/*.sass', ['sass']);
   gulp.watch('./dev/jade/**/*.jade', ['jade']);
   gulp.watch('./dev/js/**/*.js', ['js']);
-  // gulp.watch([
-  //   './gulpfile.js',
-  //   './dev/jade/data/**/*.*'
-  // ], gulpRestart);
+  gulp.watch([
+    './gulpfile.js',
+    './dev/jade/data/**/*.*'
+  ], gulpRestart);
 });
 
 

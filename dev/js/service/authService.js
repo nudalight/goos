@@ -4,14 +4,21 @@ angular
 ;
 
 authService
-  .$inject = ['$rootScope', 'locker', 'md5', '$cookies', '$window', '$log']
+  .$inject = ['$rootScope', 'locker', 'md5', '$cookies', '$log', '$location']
 ;
 
 
-function authService ($rootScope, locker, md5, $cookies, $window, $log){
+function authService($rootScope, locker, md5, $cookies, $log, $location){
 
-  this.auth = function(username){
+  var vm = this;
 
+  vm.auth = auth;
+  vm.register = register;
+  vm.login = login;
+  vm.logout = logout;
+
+
+  function auth(username){
     var
       expire = new Date(new Date().getTime() + 1000 * 3600 * 24 * 2),
       tokenStr = (new Date).toString(),
@@ -21,13 +28,16 @@ function authService ($rootScope, locker, md5, $cookies, $window, $log){
     $cookies.put('username', username, { expires: expire });
     $cookies.put('token', token, { expires: expire });
 
-    $window.location.reload(); // otherwise the path would be not allowed by urlWatcherService
+    $rootScope.user.username = username;
+    $rootScope.user.token = token;
+
+    $location.path('/summary');
 
     return token;
-  };
+  }
 
 
-  this.register = function(formObj){
+  function register(formObj){
     var U = locker.namespace('user=' + formObj.username);
 
     for (var key in formObj){
@@ -43,10 +53,10 @@ function authService ($rootScope, locker, md5, $cookies, $window, $log){
     }
 
     U.put('token', this.auth(formObj.username));
-  };
+  }
 
 
-  this.login = function(username, password){
+  function login(username, password){
 
     var
       U = locker.namespace('user=' + username),
@@ -76,23 +86,21 @@ function authService ($rootScope, locker, md5, $cookies, $window, $log){
     }
 
     return condPasswordMatch; // only for wrong pass msg
+  }
 
 
-  };
-
-
-  this.logout = function(){
-
+  function logout(){
     var U = locker.namespace('user=' + $rootScope.user.username);
     U.forget('token');
 
     $cookies.remove('username');
     $cookies.remove('token');
 
-    $window.location.reload();  // otherwise the path would be not allowed by urlWatcherService
+    $rootScope.user.username = null;
+    $rootScope.user.token = null;
 
-  };
-
+    $location.path('/login');
+  }
 
 
 }

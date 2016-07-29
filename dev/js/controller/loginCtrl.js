@@ -4,11 +4,11 @@ angular
 ;
 
 loginCtrl
-  .$inject = ['$scope', 'authService']
+  .$inject = ['$scope', 'authService', '$log']
 ;
 
 
-function loginCtrl($scope, authService) {
+function loginCtrl($scope, authService, $log) {
 
   $scope.errors = {};
 

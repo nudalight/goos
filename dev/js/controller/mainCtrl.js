@@ -4,7 +4,7 @@ angular
 ;
 
 mainCtrl
-  .$inject = ['$rootScope', '$scope', 'authService', '$cookies', 'urlWatchService'] 
+  .$inject = ['$rootScope', '$scope', 'authService', '$cookies', 'urlWatchService']
 ;
 
 

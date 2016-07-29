@@ -19,8 +19,8 @@ mixin form-content(formName, dataGroup, modifier, ...inputNames)
                     required = fi.required
                     validate-me = fi.validators && fi.validators.validateMe || false
                     same-as = (fi.validators && fi.validators.sameAs) ? dataGroup + '.' + fi.validators.sameAs : false
-                    username-exists = (modifier != 'login' && inputNames[i] == 'username') ? true : false
-                    ng-disabled = (modifier == 'summary' && (inputNames[i] == 'name' || inputNames[i] == 'surname')) ? true : false
+                    username-exists = !!(modifier != 'login' && inputNames[i] == 'username')
+                    disabled = !!(modifier == 'summary' && (inputNames[i] == 'name' || inputNames[i] == 'surname'))
                 )
                 ng-messages(
                     role = 'alert'
