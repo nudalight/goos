@@ -4,11 +4,11 @@ angular
 ;
 
 urlWatchService
-  .$inject = ['$rootScope', '$location', '$log']
+  .$inject = ['authService', '$location', '$log']
 ;
 
 
-function urlWatchService($rootScope, $location, $log){
+function urlWatchService(authService, $location, $log){
 
   var that = this;
 
@@ -25,7 +25,7 @@ function urlWatchService($rootScope, $location, $log){
 
   this.handle = function(event, next, current) {
 
-    that.authed = $rootScope.user.token;
+    that.authed = authService.user.token;
     that.allowed = that.authed ? that.urls.authed : that.urls.notauthed;
 
     var isAllowed = that.isPathAllowed(next);

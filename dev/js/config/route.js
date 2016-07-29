@@ -12,19 +12,15 @@ function route($routeProvider) {
   $routeProvider
     .when('/login', {
       templateUrl: 'html/login.html',
-      controller: 'loginCtrl'
+      controller: 'loginController'
     })
     .when('/register', {
       templateUrl: 'html/register.html',
-      controller: 'registerCtrl'
+      controller: 'registerController'
     })
     .when('/summary', {
       templateUrl: 'html/summary.html',
-      controller: 'summaryCtrl'
-    })
-    .when('/youtube', {
-      templateUrl: 'html/youtube.html',
-      controller: 'youtubeCtrl'
+      controller: 'summaryController'
     })
     .otherwise({
       redirectTo: '/login'

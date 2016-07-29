@@ -4,11 +4,11 @@ angular
 ;
 
 authService
-  .$inject = ['$rootScope', 'locker', 'md5', '$cookies', '$log', '$location']
+  .$inject = ['locker', 'md5', '$cookies', '$log', '$location'];
 ;
 
 
-function authService($rootScope, locker, md5, $cookies, $log, $location){
+function authService(locker, md5, $cookies, $log, $location){
 
   var vm = this;
 
@@ -17,6 +17,10 @@ function authService($rootScope, locker, md5, $cookies, $log, $location){
   vm.login = login;
   vm.logout = logout;
 
+  vm.user = {
+    username: $cookies.get('username'),
+    token: $cookies.get('token')
+  };
 
   function auth(username){
     var
@@ -28,8 +32,8 @@ function authService($rootScope, locker, md5, $cookies, $log, $location){
     $cookies.put('username', username, { expires: expire });
     $cookies.put('token', token, { expires: expire });
 
-    $rootScope.user.username = username;
-    $rootScope.user.token = token;
+    vm.user.username = username;
+    vm.user.token = token;
 
     $location.path('/summary');
 
@@ -90,14 +94,14 @@ function authService($rootScope, locker, md5, $cookies, $log, $location){
 
 
   function logout(){
-    var U = locker.namespace('user=' + $rootScope.user.username);
+    var U = locker.namespace('user=' + authService.user.username);
     U.forget('token');
 
     $cookies.remove('username');
     $cookies.remove('token');
 
-    $rootScope.user.username = null;
-    $rootScope.user.token = null;
+    vm.user.username = null;
+    vm.user.token = null;
 
     $location.path('/login');
   }

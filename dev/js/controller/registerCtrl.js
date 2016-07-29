@@ -1,6 +1,6 @@
 angular
   .module('goos')
-  .controller('registerCtrl', registerCtrl)
+  .controller('registerController', registerCtrl)
 ;
 
 registerCtrl
@@ -14,31 +14,25 @@ function registerCtrl($scope, authService, helperFactory){
     step: 1
   };
  
-  // костыль
-  $scope.formTwo = {
-    birthday: new Date(0)
+  $scope.actions = {
+    stepUp: stepUp
   };
 
 
+  function stepUp(nodeForm) {
 
-  $scope.actions = {
-    stepUp: function (nodeForm) {
+    if (nodeForm.$valid) {
 
-      if (nodeForm.$valid) {
+      $scope.state.step++;
 
-        $scope.state.step++;
-
-        if ($scope.state.step == 3) {
-          var formsData = helperFactory.mergeObjects($scope.formOne, $scope.formTwo);
-          authService.register(formsData);
-        }
-
+      if ($scope.state.step == 3) {
+        var formsData = helperFactory.mergeObjects($scope.formOne, $scope.formTwo);
+        authService.register(formsData);
       }
 
     }
-  };
 
-
+  }
 
 
 }
